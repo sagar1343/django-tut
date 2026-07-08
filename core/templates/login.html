@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-8">
+    <form action="{% url 'login-user' %}" method="POST">
+        {% csrf_token %}
+        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <legend class="fieldset-legend">Login Form</legend>
+
+            <label class="label">Username</label>
+            <input type="text" name="username" class="input" placeholder="johndoe123" />
+
+            <label class="label">Password</label>
+            <input type="password" name="password" class="input" />
+
+            <button type="submit" class="btn btn-secondary">Login</button>
+        </fieldset>
+    </form>
+</div>
+
+{% endblock %}
