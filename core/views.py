@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import Job
-from django.http import HttpResponse
 
 # Create your views here.
 
@@ -22,7 +21,7 @@ def create_job(request):
         )
         return redirect("/")
     else:
-        return render(request, "addform.html")
+        return render(request, "jobform.html")
 
 
 def delete_job(request, id):
@@ -30,3 +29,20 @@ def delete_job(request, id):
         job = Job.objects.get(id=id)
         job.delete()
     return redirect("/")
+
+
+def update_job(request, id):
+    job = Job.objects.get(id=id)
+    if request.method == "POST":
+        job.title = request.POST.get("title")
+        job.description = request.POST.get("description")
+        job.salary = request.POST.get("salary")
+        job.company_name = request.POST.get("company_name")
+        job.location = request.POST.get("location")
+
+        if request.FILES.get("logo"):
+            job.logo = request.FILES.get("logo")
+        job.save()
+        return redirect("/")
+
+    return render(request, "jobform.html", {"job": job})

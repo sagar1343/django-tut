@@ -33,7 +33,7 @@
                     <h2 class="card-title">{{ job.title }}</h2>
                     <p>{{ job.description }}</p>
                     <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Apply</button>
+                        <a href="{% url 'update-job' job.id %}" class="btn btn-accent">Edit</a>
                         <form action="{% url 'delete-job' job.id %}" method="post">
                             {% csrf_token %}
                             <button class="btn btn-error" type="submit">Delete</button>
